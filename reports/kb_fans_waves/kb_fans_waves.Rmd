@@ -1,0 +1,157 @@
+---
+title: "Title"
+output:
+  html_document:
+    css: ~/GitHub/RADC/libs/css/sidebar.css
+    keep_md: yes
+    toc: yes
+---
+
+<!-- These two chunks should be added in the beginning of every .Rmd that you want to source an .R script -->
+<!--  The 1st mandatory chunck  -->
+<!--  Set the working directory to the repository's base directory -->
+```{r, echo=F, message=F} 
+#Don't combine this call with any other chunk 
+# cat("Working directory: ", getwd()) # check where you are
+  library(knitr)
+# Rmd is in "./reports/reportA/reportA.Rmd", but now the root is "./"
+  knitr::opts_knit$set(root.dir='../../') 
+```
+
+<!--  The 2nd mandatory chunck  -->
+<!-- Set the report-wide options, and point to the external code file. -->
+```{r set_options, echo=F}
+# set options shared by all chunks
+opts_chunk$set(
+  results='show', 
+  message = TRUE,
+  comment = NA, 
+  tidy = FALSE,
+  fig.height = 8, 
+  fig.width = 12, 
+  out.width = "550px",
+  fig.path = 'figure_rmd/',     
+  dev = "png",
+  dpi = 300
+  # fig.path = 'figure_pdf/',     
+  # dev = "pdf"#,
+  # dev.args=list(pdf = list(colormodel = 'cmyk'))
+)
+echoChunks <- FALSE
+messageChunks <- FALSE
+warningChunks <- FALSE
+resultsChunks <- "hide"
+options(width=120) #So the output is 50% wider than the default.
+# connect to the file with the underlying R script  
+read_chunk("./reports/kb_fans_waves/kb_fans_waves.R") 
+```
+
+
+
+<!-- Load  packages used in the report --> 
+```{r load_packages, echo=echoChunks, results=resultsChunks, message=messageChunks, warning=warningChunks}
+```
+
+<!-- define Root and other common locations  --> 
+```{r load_paths, echo=echoChunks, results=resultsChunks, message=messageChunks, warning=warningChunks}
+```
+
+<!-- Load any Global functions and variables declared in the R file --> 
+```{r declare_globals, echo=echoChunks, results=resultsChunks, message=messageChunks, warning=warningChunks}
+```
+
+<!-- Load 'sourced' R files. --> 
+```{r load_scripts, echo=echoChunks, results=resultsChunks, message=messageChunks, warning=warningChunks}
+```
+
+<!-- Load the datasets.   -->
+```{r load_data, echo=echoChunks, results=resultsChunks, message=messageChunks, warning=warningChunks}
+```
+
+<!-- Tweak the datasets.   -->
+```{r tweak_data, echo=echoChunks, results=resultsChunks, message=messageChunks, warning=warningChunks}
+```
+
+<!-- Basic table view.   -->
+```{r basic_table, echo=TRUE, results=resultsChunks, message=messageChunks, warning=warningChunks}
+```
+
+
+```{r male_cognitive_04, echo=TRUE, results="hide", message=messageChunks, warning=warningChunks}
+```
+
+```{r male_cognitive_05, echo=TRUE, results="hide", message=messageChunks, warning=warningChunks}
+```
+
+```{r male_cognitive_06, echo=TRUE, results="hide", message=messageChunks, warning=warningChunks}
+```
+
+```{r male_cognitive_07, echo=TRUE, results="hide", message=messageChunks, warning=warningChunks}
+```
+
+```{r male_cognitive_08, echo=TRUE, results="hide", message=messageChunks, warning=warningChunks}
+```
+
+```{r male_cognitive_09, echo=TRUE, results="hide", message=messageChunks, warning=warningChunks}
+```
+
+```{r male_cognitive_10, echo=TRUE, results="hide", message=messageChunks, warning=warningChunks}
+```
+
+```{r male_cognitive_11, echo=TRUE, results="hide", message=messageChunks, warning=warningChunks}
+```
+
+```{r male_cognitive_12, echo=TRUE, results="hide", message=messageChunks, warning=warningChunks}
+```
+
+```{r male_cognitive_13, echo=TRUE, results="hide", message=messageChunks, warning=warningChunks}
+```
+
+```{r male_cognitive_14, echo=TRUE, results="hide", message=messageChunks, warning=warningChunks}
+```
+
+```{r male_cognitive_15, echo=TRUE, results="hide", message=messageChunks, warning=warningChunks}
+```
+
+```{r male_cognitive_16, echo=TRUE, results="hide", message=messageChunks, warning=warningChunks}
+```
+
+```{r female_cognitive_04, echo=TRUE, results="hide", message=messageChunks, warning=warningChunks}
+```
+
+```{r female_cognitive_05, echo=TRUE, results="hide", message=messageChunks, warning=warningChunks}
+```
+
+```{r female_cognitive_06, echo=TRUE, results="hide", message=messageChunks, warning=warningChunks}
+```
+
+```{r female_cognitive_07, echo=TRUE, results="hide", message=messageChunks, warning=warningChunks}
+```
+
+```{r female_cognitive_08, echo=TRUE, results="hide", message=messageChunks, warning=warningChunks}
+```
+
+```{r female_cognitive_09, echo=TRUE, results="hide", message=messageChunks, warning=warningChunks}
+```
+
+```{r female_cognitive_10, echo=TRUE, results="hide", message=messageChunks, warning=warningChunks}
+```
+
+```{r female_cognitive_11, echo=TRUE, results="hide", message=messageChunks, warning=warningChunks}
+```
+
+```{r female_cognitive_12, echo=TRUE, results="hide", message=messageChunks, warning=warningChunks}
+```
+
+```{r female_cognitive_13, echo=TRUE, results="hide", message=messageChunks, warning=warningChunks}
+```
+
+```{r female_cognitive_14, echo=TRUE, results="hide", message=messageChunks, warning=warningChunks}
+```
+
+```{r female_cognitive_15, echo=TRUE, results="hide", message=messageChunks, warning=warningChunks}
+```
+
+```{r female_cognitive_16, echo=TRUE, results="hide", message=messageChunks, warning=warningChunks}
+```
+

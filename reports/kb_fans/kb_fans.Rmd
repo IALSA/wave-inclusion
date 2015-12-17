@@ -1,0 +1,98 @@
+---
+title: "Title"
+output:
+  html_document:
+    css: ~/GitHub/RADC/libs/css/sidebar.css
+    keep_md: yes
+    toc: yes
+---
+
+<!-- These two chunks should be added in the beginning of every .Rmd that you want to source an .R script -->
+<!--  The 1st mandatory chunck  -->
+<!--  Set the working directory to the repository's base directory -->
+```{r, echo=F, message=F} 
+  # Don't combine this call with any other chunk 
+  # cat("Working directory: ", getwd()) # check where you are
+  # Rmd is in "./reports/reportA/reportA.Rmd", but now the root is "./"
+library(knitr)
+knitr::opts_knit$set(root.dir='../../') 
+```
+
+<!--  The 2nd mandatory chunck  -->
+<!-- Set the report-wide options, and point to the external code file. -->
+```{r set_options, echo=F}
+# set options shared by all chunks
+opts_chunk$set(
+  results    ='show', 
+  message    = TRUE,
+  comment    = NA, 
+  tidy       = FALSE,
+  fig.height = 10, 
+  fig.width  = 10, 
+  out.width  = "550px",
+  fig.path   = 'figure_rmd/',     
+  dev        = "png",
+  dpi        = 100
+  # fig.path = 'figure_pdf/',     
+  # dev = "pdf"#,
+  # dev.args=list(pdf = list(colormodel = 'cmyk'))
+)
+echoChunks <- FALSE
+messageChunks <- FALSE
+warningChunks <- FALSE
+resultsChunks <- "hide"
+options(width=120) #So the output is 50% wider than the default.
+# connect to the file with the underlying R script  
+read_chunk("./reports/kb_fans/kb_fans.R") 
+```
+
+<!-- Load any Global functions and variables declared in the R file --> 
+```{r declare_globals, echo=echoChunks, results=resultsChunks, message=messageChunks, warning=warningChunks}
+```
+
+
+<!-- Load 'sourced' R files. --> 
+```{r load_sources, echo=echoChunks, results=resultsChunks, message=messageChunks, warning=warningChunks}
+```
+
+<!-- Load  packages used in the report --> 
+```{r load_packages, echo=echoChunks, results=resultsChunks, message=messageChunks, warning=warningChunks}
+```
+
+
+<!-- Load the datasets.   -->
+```{r load_data, echo=echoChunks, results=resultsChunks, message=messageChunks, warning=warningChunks}
+```
+
+<!-- Tweak the datasets.   -->
+```{r tweak_data, echo=echoChunks, results=resultsChunks, message=messageChunks, warning=warningChunks}
+```
+
+<!-- Basic table view.   -->
+```{r basic_table, echo=TRUE, results=resultsChunks, message=messageChunks, warning=warningChunks}
+```
+
+<!-- Basic graph view.   -->
+```{r basic_graph, echo=TRUE, results=resultsChunks, message=messageChunks, warning=warningChunks, eval=FALSE}
+```
+
+```{r time_observed, echo=TRUE, results="show", message=messageChunks, warning=warningChunks}
+```
+
+```{r time_fixed_effects, echo=TRUE, results="show", message=messageChunks, warning=warningChunks}
+```
+
+```{r time_factor_scores, echo=TRUE, results="show", message=messageChunks, warning=warningChunks}
+```
+
+```{r age_observed, echo=TRUE, results="show", message=messageChunks, warning=warningChunks}
+```
+
+```{r age_fixed_effects, echo=TRUE, results="show", message=messageChunks, warning=warningChunks}
+```
+
+```{r age_factor_scores, echo=TRUE, results="show", message=messageChunks, warning=warningChunks}
+```
+
+```{r combine_graphs, echo=TRUE, results="show", message=messageChunks, warning=warningChunks}
+```

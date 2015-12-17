@@ -1,0 +1,68 @@
+---
+title: "Adding attr to columns of a DF"
+output: html_document
+---
+
+<!--  Set the working directory to the repository's base directory; this assumes the report is nested inside of two directories.-->
+```{r, echo=F, message=F} 
+# cat("Working directory: ", getwd())
+  library(knitr)
+  opts_knit$set(root.dir='../../')  #Don't combine this call with any other chunk -especially one that uses file paths.
+```
+
+<!-- Set the report-wide options, and point to the external code file. -->
+```{r set_options, echo=F}
+# cat("Working directory: ", getwd())
+opts_chunk$set(
+  results='show', 
+  tidy = FALSE,
+  fig.path = 'figure_study/'
+)
+
+echoChunks <- TRUE
+options(width=120) #So the output is 50% wider than the default.
+read_chunk("./scripts/issues/attributes_df_columns.R") #This allows knitr to call chunks tagged in the underlying *.R file.
+```
+
+I've recently imported an SPSS file to [one of the projects](https://github.com/IALSA/LASA), using a call
+```
+ Hmisc::spss.get(filePath, use.value.labels = TRUE)
+```
+The dataframe that came out of it had the following structure:
+```{r load_demo, echo=echoChunks}
+```
+which was quite convenient, because I could have written a custom function to pair names of the variables and their descriptive labels into a separate dataset and print it for examination.
+
+```{r nl_function, echo=echoChunks}
+```
+
+I would like to recreate this documentation structure from scratch. So I've taken the dataframe I'd like to annotate
+
+```{r load_zero, echo=echoChunks}
+```
+
+and started changing the attributes in the following fashion:
+
+```{r add_attributes, echo=echoChunks}
+```
+
+which was working out fine
+```{r print_attributes, echo=echoChunks}
+```
+
+until I ran into <code>dplyr</code> problem:
+```{r basic_counts, echo=echoChunks, eval=FALSE}
+```
+
+```
+Quitting from lines 57-57 (attributes_df_columns.Rmd) 
+Error in eval(expr, envir, enclos) : 
+  column 'id' of type integer has unsupported attributes: label
+Calls: <Anonymous> ... group_by_.data.frame -> grouped_df -> grouped_df_impl -> .Call
+
+Execution halted
+```
+
+Should I try to mimic that attribute structure, which give gives me this flexibility?
+```{r demo_counts, echo=echoChunks}
+```
