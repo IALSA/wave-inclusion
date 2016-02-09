@@ -6,5 +6,6 @@
 > Rast, P., & Hofer, S. M. (2014). [Longitudinal design considerations to optimize power to detect variances and covariances among rates of change: Simulation results based on actual longitudinal studies](https://scholar.google.ca/scholar?hl=en&q=Longitudinal+design+considerations+to+optimize+power+to+detect+variances+and+covariances+among+rates+of+change%3A+Simulation+results+based+on+actual+longitudinal+studies.&btnG=&as_sdt=1%2C5&as_sdtp=). Psychological methods, 19(1), 133. [full text](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4080819/)
 
 Background Notes:
-- reliability of individual growth is dependent on the magnitudie of interindividual heterogenity in growth, the size of the measuremetn error variance, and SST which is dependent on the number of waves, the spacing or interval betweeen these waves, and the total duration of the study. Quote from Willett (1989) "with sufficient waves added, the influence of fallible measurement rapidly dwindles to zero".
+- reliability of individual growth is dependent on the magnitudie of interindividual heterogenity in growth, the size of the measurement error variance, and SST which is dependent on the number of waves, the spacing or interval betweeen these waves, and the total duration of the study. Quote from Willett (1989) "with sufficient waves added, the influence of fallible measurement rapidly dwindles to zero".
+- Growth curve reliability is an index of measurement reliability but does not directly provide information on the ability to detect slope variances.
 
