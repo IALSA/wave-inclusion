@@ -10,7 +10,7 @@
 
 ## 2010
 
-<cite> von Oertzen, T., Ghisletta, P., & Lindenberger, U. (2010). Simulating statistical power in latent growth curve modeling: A strategy for evaluating age-based changes in cognitive resources. In Resource-adaptive cognitive processes (pp. 95-117). Springer Berlin Heidelberg.</cite>
+<cite> von Oertzen, T., Ghisletta, P., & Lindenberger, U. (2010). [Simulating statistical power in latent growth curve modeling: A strategy for evaluating age-based changes in cognitive resources](https://scholar.google.ca/scholar?hl=en&q=Simulating+statistical+power+in+latent+growth+curve+modeling%3A+A+strategy+for+evaluating+age-based+changes+in+cognitive+resources.&btnG=&as_sdt=1%2C5&as_sdtp=). In Resource-adaptive cognitive processes (pp. 95-117). Springer Berlin Heidelberg.</cite> [full text](http://pubman.mpdl.mpg.de/pubman/item/escidoc:2099415/component/escidoc:2099414/TVO_Simulating_2010.pdf)
 
 
 ## 2008 
