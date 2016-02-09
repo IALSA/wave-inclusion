@@ -6,7 +6,7 @@
 <cite>Coulombe, P., Selig, J. P., & Delaney, H. D. (2015). [Ignoring individual differences in times of assessment in growth curve modeling](https://scholar.google.ca/scholar?hl=en&q=ignoring+individual+differences+in+times+of+assessment+in+growth+curve+modeling&btnG=&as_sdt=1%2C5&as_sdtp=). *International Journal of Behavioral Development*, 0165025415577684.
 
 ##2014
-<cite> Rast, P., & Hofer, S. M. (2014). [Longitudinal design considerations to optimize power to detect variances and covariances among rates of change: Simulation results based on actual longitudinal studies](https://scholar.google.ca/scholar?hl=en&q=Longitudinal+design+considerations+to+optimize+power+to+detect+variances+and+covariances+among+rates+of+change%3A+Simulation+results+based+on+actual+longitudinal+studies.&btnG=&as_sdt=1%2C5&as_sdtp=). Psychological methods, 19(1), 133.</cite> [full text](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4080819/)
+http://pubman.mpdl.mpg.de/pubman/item/escidoc:2099415/component/escidoc:2099414/TVO_Simulating_2010.pdf
 
 ## 2010
 
