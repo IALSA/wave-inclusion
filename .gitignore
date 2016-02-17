@@ -13,6 +13,12 @@ devtools.zip
 # Protected Information; see cubuspl42's answer in http://stackoverflow.com/questions/2415873/exceptions-in-gitignore
 ./data-unshared/raw/*
 ./data-unshared/derived/*
+./data-unshared/raw/*.dat
+./data-unshared/raw/*.rds
+./data-unshared/raw/*.csv
+!./data-unshared/raw/map/nl_augmented.csv
+
+
 
 ./sandbox/00-test-model/data/*.dat
 ./sandbox/00-test-model/data/*.csv
