@@ -11,8 +11,13 @@ devtools.zip
 
 ##############
 # Protected Information; see cubuspl42's answer in http://stackoverflow.com/questions/2415873/exceptions-in-gitignore
-/data-unshared/raw/*
-/data-unshared/derived/*
+./data-unshared/raw/*
+./data-unshared/derived/*
+
+./sandbox/00-test-model/data/*.dat
+./sandbox/00-test-model/data/*.csv
+
+
 
 # Unnecessary files for knitr reports
 
