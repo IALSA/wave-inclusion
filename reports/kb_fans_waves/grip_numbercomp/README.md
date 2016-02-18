@@ -1,4 +1,4 @@
-**kb_fans** wxamines the outcomes **grip** and ** number comparison** in a bivariate linear model over increasing number of waves. 
+**kb_fans** examine the outcomes **grip** and ** number comparison** in a bivariate linear model over increasing number of waves. 
 
 ##### FEMALE : reconstructing GRIP trajectories from bivariate linear model  of grip and number comparison
 ![](https://raw.githubusercontent.com/IALSA/wave-inclusion/master/reports/kb_fans_waves/grip_numbercomp/grip(X)_numbercomp_women.gif)  
