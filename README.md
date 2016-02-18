@@ -13,3 +13,5 @@ Does the number of waves selected for model estimation influence the properties 
 
 ![profile](https://raw.githubusercontent.com/IALSA/wave-inclusion/master/reports/kb_profiles/figure_rmd/grip_numbercomp-1.png)
 ![waves](https://raw.githubusercontent.com/IALSA/wave-inclusion/master/reports/kb_fans_waves/figure_rmd/female_cognitive_12-1.png)
+
+
