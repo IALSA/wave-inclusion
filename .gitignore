@@ -17,7 +17,7 @@ devtools.zip
 ./data-unshared/raw/*.rds
 ./data-unshared/raw/*.csv
 !./data-unshared/raw/map/nl_augmented.csv
-
+./scripts/mplus/prototype/*.dat
 
 
 ./sandbox/00-test-model/data/*.dat
