@@ -57,4 +57,12 @@ Thumbs.db
 # Folder config file
 Desktop.ini
 
+# File types
+*.dat
+long_dataset.csv
+wide_dataset.csv
+*.dgm
+*.out 
+*.gh5 
+
 
