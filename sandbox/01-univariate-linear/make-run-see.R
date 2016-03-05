@@ -26,22 +26,13 @@ source("./sandbox/01-univariate-linear/functions-to-generate-Mplus-scripts.R")
 # load functions that process the output files and create a summary dataset
 source("./scripts/mplus/extraction-functions.R")
 
-
-
 # create a object with main_theme definition
 source("./scripts/graphs/main-theme.R")
-# load graphical function
-source("./scripts/graphs/kb-profiles-functions.R")
 
 
-# point to  the folder with datasets containing model results
-
-run_models_on <- FALSE # TRUE - run models, FALSE - only create script
-
-
-
-
-
+## look at the data
+source("./sandbox/01-univariate-linear/look-at-data.R")
+str(dw)
 ## Run the lines above to load the needed functions
 ## Execute script snippets for each pair individually below this
 

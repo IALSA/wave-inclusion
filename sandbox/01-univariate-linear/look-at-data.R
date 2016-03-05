@@ -52,15 +52,10 @@ names.labels <- function(ds){
 # ---- load_varnames ---------------------------------------------------------
 (nl <- names.labels(ds)) # nl for (n)ame and (l)ables
 
-write.csv(nl, file="./data/unshared/derived/nl_raw.csv")
+write.csv(nl, file="./sandbox/01-univariate-linear/variables_labels.csv")
 # augment the names with classifications. Directly edit the .csv
-nl_augmentedPath <- "./data/unshared/derived/nl_augmented.csv"
-# imported edited/augmented .csv containing a classification of variables
-# varnames <- read.csv(nl_augmentedPath, stringsAsFactors = F)
-# varnames$X <- NULL
-# varnames
-#
-# dplyr::arrange(varnames, type)
+nl_augmentedPath <- "./sandbox/01-univariate-linear/nl_augmented.csv"
+
 
 # ----- select_subset ------------------------------------
 # select variables you will need for modeling, be conservative
@@ -105,9 +100,6 @@ d <- d %>%
   dplyr::ungroup()
 
 
-set.seed(42)
-random_subset <- sample(unique(d$id), size = 500)
-d <- d[d$id %in% random_subset, ]
 
 # ---- long_to_wide -----------------------------------------
 # long to wide conversion might rely on the classification given to the variables with respect to time : variant or invariant
@@ -134,6 +126,10 @@ dw <- data.table::dcast(data.table::setDT(d), id + age_bl + htm + wtkg + msex + 
 
 
 dw[is.na(dw)] <- -9999
+
+set.seed(42)
+random_subset <- sample(unique(dw$id), size = 500)
+dw <- dw[d$id %in% random_subset, ]
 
 
 # ---- export_data -------------------------------------
