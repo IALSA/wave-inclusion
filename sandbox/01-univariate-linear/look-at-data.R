@@ -15,11 +15,15 @@ requireNamespace("ggplot2")
 requireNamespace("dplyr") #Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
 requireNamespace("testit")
 requireNamespace("reshape2") # data transformations
+loadNamespace("data.table") # data transformations
 
 # ---- declare-globals ---------------------------------------------------------
 # path_input  <- "./data/unshared/raw/map/ds0.rds"
 path_input  <- "../MAP/data-unshared/derived/ds0.rds"
 # figure_path <- 'manipulation/stitched-output/te/'
+
+# put test assert here to check the connection.
+
 
 # ---- load-data ---------------------------------------------------------------
 ds <- readRDS(path_input)
@@ -52,11 +56,11 @@ write.csv(nl, file="./data/unshared/derived/nl_raw.csv")
 # augment the names with classifications. Directly edit the .csv
 nl_augmentedPath <- "./data/unshared/derived/nl_augmented.csv"
 # imported edited/augmented .csv containing a classification of variables
-varnames <- read.csv(nl_augmentedPath, stringsAsFactors = F)
-varnames$X <- NULL
-varnames
-
-dplyr::arrange(varnames, type)
+# varnames <- read.csv(nl_augmentedPath, stringsAsFactors = F)
+# varnames$X <- NULL
+# varnames
+#
+# dplyr::arrange(varnames, type)
 
 # ----- select_subset ------------------------------------
 # select variables you will need for modeling, be conservative
@@ -101,6 +105,9 @@ d <- d %>%
   dplyr::ungroup()
 
 
+set.seed(42)
+random_subset <- sample(unique(d$id), size = 500)
+d <- d[d$id %in% random_subset, ]
 
 # ---- long_to_wide -----------------------------------------
 # long to wide conversion might rely on the classification given to the variables with respect to time : variant or invariant
@@ -124,7 +131,7 @@ dw <- data.table::dcast(data.table::setDT(d), id + age_bl + htm + wtkg + msex + 
 
 
   ))
-dw
+
 
 dw[is.na(dw)] <- -9999
 
@@ -138,23 +145,3 @@ write(names(d), "./sandbox/syntax-creator/outputs/grip-numbercomp/long-variable-
 
 write.table(dw,"./sandbox/syntax-creator/outputs/grip-numbercomp/wide-dataset.dat", row.names=F, col.names=F)
 write(names(dw), "./sandbox/syntax-creator/outputs/grip-numbercomp/wide-variable-names.txt", sep=" ")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
