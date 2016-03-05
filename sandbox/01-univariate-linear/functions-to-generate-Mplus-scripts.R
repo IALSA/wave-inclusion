@@ -66,12 +66,6 @@ make_script_waves <- function(
   process_a_timepoints <- paste(process_a_timepoints, collapse="\n")
   proto_input <- gsub(pattern ="%process_a_timepoints%", replacement = process_a_timepoints, x = proto_input)
 
-  process_b_timepoints <- paste0("b",wave_set_modeled)
-  process_b_timepoints <- paste(process_b_timepoints, collapse="\n")
-  proto_input <- gsub(pattern ="%process_b_timepoints%", replacement = process_b_timepoints, x = proto_input)
-  # Tscores are # define the time points
-  proto_input <- gsub(pattern ="%process_b_timepoints%", replacement = process_b_timepoints, x = proto_input)
-
   # Useobservations are # select a subset of observation
   if(subgroup_sex=="male"){
     print_sex_value <- paste0("msex EQ 1")}else{

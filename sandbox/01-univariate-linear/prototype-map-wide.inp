@@ -17,8 +17,6 @@ USEVAR are
 %estimated_timepoints%
 	!modelled timepoints of process A
 %process_a_timepoints% 
-	! modelled timepoints of process B
-%process_b_timepoints% 
 	! covariates used in the model
 Bage
 Educat
@@ -40,10 +38,8 @@ dementia_12 NE 1 and dementia_13 NE 1 and dementia_14 NE 1 and
 dementia_15 NE 1 and dementia_16;
 
 DEFINE:
-	! assign variables to the process p
+	! assign variables to the process a
 %match_timepoints_process_a%
-	!assign variables to the process c
-%match_timepoints_process_b%
 	!assign variables to time points
 %match_timepoints%
 	
@@ -61,39 +57,18 @@ COVERAGE=.00;
 MODEL:
 	!first-level equation
 	! process A
-ia sa | %process_a_timepoints% AT %estimated_timepoints%;
-	! process B
-ib sb | %process_b_timepoints% AT %estimated_timepoints%;
+ia sa | a1 - a%waves_max% AT time1 - time%waves_max%;
 	!variance of the first-level terms
 ia (v_ia);
 sa (v_sa);
-ib (v_ib);
-sb (v_sb);
 	!covariance among first-level terms
 ia WITH sa (c_iasb);
-ia WITH ib (c_iaib);
-ia WITH sb (c_iasb);
-sa WITH ib (c_saib);
-sa WITH sb (c_sasb);
-ib WITH sb (c_iasb);
 	!second-level equation
-ia sa ib sb ON %covariates%;
+ia sa  ON %covariates%;
 	!residual means of process A
 %process_a_timepoints% (res_a);
 	!residual means of process A
-%process_b_timepoints% (res_b);
-	!Paired covariances constrained to be equal across t
-%process_a_timepoints% pwith %process_b_timepoints%(res_cov);
 
-MODEL CONSTRAINT:
-	!assigns labels to new parameters;
-NEW r_iaib;
-NEW r_sasb;
-NEW r_res_ab;
-	!
-r_iaib = c_iaib/((v_ia**0.5)*(v_ib**0.5));
-r_sasb = c_sasb/((v_sa**0.5)*(v_sb**0.5));
-r_res_ab = res_cov/((res_a**0.5)*(res_b**0.5));
 
 OUTPUT: sampstat cinterval;
 PLOT: Type is Plot1 Plot2 Plot3;

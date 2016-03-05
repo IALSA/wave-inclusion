@@ -20,11 +20,11 @@ requireNamespace("stringr")
 
 
 #e.g pc_TAU_00 <- c("pc_TAU_00_est", "pc_TAU_00_se", "pc_TAU_00_wald", "pc_TAU_00_pval")
-source("./sandbox/syntax-creator/group-variables.R") # selected_results
+source("./sandbox/01-univariate-linear/group-variables.R") # selected_results
 # load functions that generate scripts
-source("./sandbox/syntax-creator/functions-to-generate-Mplus-scripts.R")
+source("./sandbox/01-univariate-linear/functions-to-generate-Mplus-scripts.R")
 # load functions that process the output files and create a summary dataset
-source("./sandbox/syntax-creator/extraction-functions.R")
+source("./scripts/mplus/extraction-functions.R")
 
 
 
@@ -51,12 +51,10 @@ run_models_on <- FALSE # TRUE - run models, FALSE - only create script
 # Use the first example as the template for further pairs
 # from "./sandbox/syntax-creator/functions_to_generate_Mplus_scripts.R"
 make_script_waves(
-  prototype = "sandbox/syntax-creator/prototype-map-wide.inp"
-  ,place_in = "sandbox/syntax-creator/outputs/grip-numbercomp"
-  ,process_a_name = "grip" # measure name
-  ,process_a_mplus = "gripavg" # Mplus variable
-  ,process_b_name = 'numbercomp'# measure name
-  ,process_b_mplus = 'cts_nccrtd'# Mplus variable
+  prototype = "sandbox/01-univariate-linear/prototype-map-wide.inp"
+  ,place_in = "sandbox/01-univariate-linear/example"
+  ,process_a_name = 'numbercomp'# measure name
+  ,process_a_mplus = 'cts_nccrtd'# Mplus variable
   ,subgroup_sex = "male" #
   ,covariates = "Bage Educat Height"
   ,wave_set_possible = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)  #Integer vector of the possible waves of the study, ie 1:16,

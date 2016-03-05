@@ -139,9 +139,10 @@ dw[is.na(dw)] <- -9999
 # ---- export_data -------------------------------------
 # At this point we would like to export the data in .dat format
 # to be fed to Mplus for any subsequent modeling
+place_in_folder <- "./sandbox/01-univariate-linear/example/"
 
-write.table(d,"./sandbox/syntax-creator/outputs/grip-numbercomp/long-dataset.dat", row.names=F, col.names=F)
-write(names(d), "./sandbox/syntax-creator/outputs/grip-numbercomp/long-variable-names.txt", sep=" ")
+write.table(d,paste0(place_in_folder,"long-dataset.dat"), row.names=F, col.names=F)
+write(names(d), paste0(place_in_folder,"long-variable-names.txt"), sep=" ")
 
-write.table(dw,"./sandbox/syntax-creator/outputs/grip-numbercomp/wide-dataset.dat", row.names=F, col.names=F)
-write(names(dw), "./sandbox/syntax-creator/outputs/grip-numbercomp/wide-variable-names.txt", sep=" ")
+write.table(dw, paste0(place_in_folder,"wide-dataset.dat"), row.names=F, col.names=F)
+write(names(dw), paste0(place_in_folder,"wide-variable-names.txt"), sep=" ")
