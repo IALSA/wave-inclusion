@@ -64,5 +64,6 @@ wide_dataset.csv
 *.dgm
 *.out 
 *.gh5 
+*.log
 
 
