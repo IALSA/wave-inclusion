@@ -14,18 +14,16 @@
 # covariates = "a"
 
 make_script_waves <- function(
-                               prototype = "sandbox/syntax-creator/prototype-map-wide.inp"
-                              ,place_in = "sandbox/syntax-creator/outputs/grip-numbercomp"
-                              ,process_a_name = "grip" # measure name
-                              ,process_a_mplus = "gripavg" # Mplus variable
-                              ,process_b_name = 'numbercomp'# measure name
-                              ,process_b_mplus = 'cts_nccrtd'# Mplus variable
-                              ,subgroup_sex = "male" #
-                              ,covariates = "Bage Educ Height"
-                              ,wave_set_possible = c(1,2,3,4,5,6,7)  #Integer vector of the possible waves of the study, ie 1:16,
-                              ,wave_set_modeled =  c(1,2,3,4,5)   #Integer vector of waves considered by the model, ie c(1,2,3,5,8).
-                              ,run_models = FALSE
-                              ){
+  prototype = "sandbox/01-univariate-linear/prototype-map-wide.inp"
+  ,place_in = "sandbox/01-univariate-linear/example"
+  ,process_a_name = 'numbercomp'# measure name
+  ,process_a_mplus = 'cts_nccrtd'# Mplus variable
+  ,subgroup_sex = "male" #
+  # ,covariates = "Bage Educat Height"
+  # ,wave_set_possible = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)  #Integer vector of the possible waves of the study, ie 1:16,
+  ,wave_set_modeled =  c(1,2,3,4,5)   #Integer vector of waves considered by the model, ie c(1,2,3,5,8).
+  ,run_models = FALSE
+                                ){
 
 
 ## Define paths to files and folders
@@ -37,7 +35,17 @@ make_script_waves <- function(
   proto_input <- scan(pathFile, what='character', sep='\n')
   #This makes it all one (big) element, if you need it in the future.
   # proto_input <- paste(proto_input, collapse="\n")
+  
+  
+  
   # declare global values
+  names_are <- read.csv(pathVarnames,header = F, stringsAsFactors = F)[ ,1]
+  (a <- grepl("age_at_visit_", names_are))
+  (b <- names_are[a])
+  (c <- gsub("age_at_visit_","",b))
+  (d <- as.numeric(c))
+  wave_set_possible <- d
+  
   wave_modeled_max <- max(wave_set_modeled)
 
 
@@ -52,7 +60,7 @@ make_script_waves <- function(
   # File = wide_dataset.dat; # automatic object, created by `look-at-data.R`
   # VARIABLE:
   # Names are # define the variabels used in the analysis
-  names_are <- read.csv(pathVarnames,header = F, stringsAsFactors = F)[ ,1]
+
   names_are <- paste(names_are, collapse="\n") #Collapse all the variable names to one element (seperated by line breaks).
   names_are <- stringr::str_wrap(str = names_are, width  = 80, exdent = 4)
   proto_input <- gsub(pattern = "%names_are%", replacement = names_are, x = proto_input)
@@ -72,6 +80,26 @@ make_script_waves <- function(
       print_sex_value <- paste0("msex EQ 0")
     }
   proto_input <- gsub("msex EQ %subgroup_sex%", paste0("msex EQ ",print_sex_value), proto_input)
+  
+#   if(condition1=="dementia"){
+#     cond1_stem <- "dementia"
+#     cond1_value <- "1"
+#     a <- length(wave_set_possible)-1 
+#     paste()
+#     print_cond1_value <- paste0(stem,"_",wave_set_possible, " NE ", cond1_value," and " )
+#   }
+#   
+#   requireNamespace("stringr")
+#   
+#   waves <- c(1:13, 16)
+#   
+#   a <- paste(paste0("a", waves), collapse=" ")
+#   times <-  paste(paste0("time", waves), collapse=" ")
+#   model_long <- paste("ia sa |", a, "AT", times, ";", collapse=" ")
+#   model_wrap <- stringr::str_wrap( str = model_long, width  = 35, exdent = 4 )
+#   
+#   "dementia","_",a," NE"
+#   
   # DEFINE:
 
   (match_timepoints_process_a <- paste0("a",wave_set_modeled,"=",process_a_mplus,"_",wave_set_modeled,";"))
