@@ -30,12 +30,14 @@ TSCORES are
 USEOBSERVATIONS are
 	!select a subset of observations
 msex EQ %subgroup_sex% and
-dementia_0 NE 1 and dementia_1 NE 1 and dementia_2 NE 1 and
-dementia_3 NE 1 and dementia_4 NE 1 and dementia_5 NE 1 and
-dementia_6 NE 1 and dementia_7 NE 1 and dementia_8 NE 1 and
-dementia_9 NE 1 and dementia_10 NE 1 and dementia_11 NE 1 and
-dementia_12 NE 1 and dementia_13 NE 1 and dementia_14 NE 1 and
-dementia_15 NE 1 and dementia_16;
+! condition 1 : dementia NE 1 at any of the time points 
+%condition_1%
+!dementia_0 NE 1 and dementia_1 NE 1 and dementia_2 NE 1 and
+!dementia_3 NE 1 and dementia_4 NE 1 and dementia_5 NE 1 and
+!dementia_6 NE 1 and dementia_7 NE 1 and dementia_8 NE 1 and
+!dementia_9 NE 1 and dementia_10 NE 1 and dementia_11 NE 1 and
+!dementia_12 NE 1 and dementia_13 NE 1 and dementia_14 NE 1 and
+!dementia_15 NE 1 and dementia_16;
 
 DEFINE:
 	! assign variables to the process a
