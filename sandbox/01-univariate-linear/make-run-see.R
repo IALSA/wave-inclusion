@@ -8,7 +8,7 @@ library(ggplot2)
 
 
 pathRoot <- getwd()
-pathFolder <- file.path(pathRoot,"sandbox/syntax-creator/outputs")
+pathFolder <- file.path(pathRoot,"sandbox/01-univariate-linear/example/outputs")
 
 requireNamespace("ggplot2")
 requireNamespace("dplyr") #Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
@@ -23,15 +23,15 @@ requireNamespace("stringr")
 source("./sandbox/01-univariate-linear/group-variables.R") # selected_results
 # load functions that generate scripts
 source("./sandbox/01-univariate-linear/functions-to-generate-Mplus-scripts.R")
-# load functions that process the output files and create a summary dataset
-source("./scripts/mplus/extraction-functions.R")
+
+
 
 # create a object with main_theme definition
 source("./scripts/graphs/main-theme.R")
 
 
 ## look at the data
-source("./sandbox/01-univariate-linear/look-at-data.R")
+# source("./sandbox/01-univariate-linear/look-at-data.R")
 str(dw)
 ## Run the lines above to load the needed functions
 ## Execute script snippets for each pair individually below this
@@ -48,16 +48,19 @@ make_script_waves(
   ,process_a_mplus = 'cts_nccrtd'# Mplus variable
   ,subgroup_sex = "male" #
   ,covariates = "Bage Educat Height"
-  ,wave_set_possible = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)  #Integer vector of the possible waves of the study, ie 1:16,
+  # ,wave_set_possible = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)  #Integer vector of the possible waves of the study, ie 1:16,
   ,wave_set_modeled =  c(1,2,3,4,5)   #Integer vector of waves considered by the model, ie c(1,2,3,5,8).
   ,run_models = FALSE
 ) # generate mplus scripts from a prototype, estimate (run_models=TRUE)
+  
 
-
-# from "./sandbox/syntax-creator/extraction_functions.R  script
-# collect_model_results(folder = "./sandbox/syntax-creator/outputs/grip_digitsymbols") # collect and save into the same folder
+# load functions that process the output files and create a summary dataset
+source("./scripts/mplus/extraction-functions.R")
+collect_model_results(folder = "./sandbox/01-univariate-linear/example") # collect and save into the same folder
 # ds <- readRDS(paste0(pathFolder,".rds")) # load the data for outcome pair
-# from "./scripts/graphs/koval_brown_profiles.R"
+
+# load functions that create information displays from the collected model results
+# source("./scripts/graphs/koval_brown_profiles.R")
 # kb_profiles(ds,  vertical="wave_count",  border=5) # produces the kb_profile graph
 
 

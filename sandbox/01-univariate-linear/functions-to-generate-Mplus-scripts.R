@@ -19,7 +19,7 @@ make_script_waves <- function(
   ,process_a_name = 'numbercomp'# measure name
   ,process_a_mplus = 'cts_nccrtd'# Mplus variable
   ,subgroup_sex = "male" #
-  # ,covariates = "Bage Educat Height"
+  ,covariates = "Bage Educat Height"
   # ,wave_set_possible = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)  #Integer vector of the possible waves of the study, ie 1:16,
   ,wave_set_modeled =  c(1,2,3,4,5)   #Integer vector of waves considered by the model, ie c(1,2,3,5,8).
   ,run_models = FALSE
@@ -106,9 +106,9 @@ make_script_waves <- function(
   match_timepoints_process_a <- paste(match_timepoints_process_a, collapse="\n")
   proto_input <- gsub(pattern ="%match_timepoints_process_a%", replacement = match_timepoints_process_a, x = proto_input)
 
-  (match_timepoints_process_b <- paste0("b",wave_set_modeled,"=",process_b_mplus,"_",wave_set_modeled,";"))
-  match_timepoints_process_b <- paste(match_timepoints_process_b, collapse="\n")
-  proto_input <- gsub(pattern ="%match_timepoints_process_b%", replacement = match_timepoints_process_b, x = proto_input)
+#   (match_timepoints_process_b <- paste0("b",wave_set_modeled,"=",process_b_mplus,"_",wave_set_modeled,";"))
+#   match_timepoints_process_b <- paste(match_timepoints_process_b, collapse="\n")
+#   proto_input <- gsub(pattern ="%match_timepoints_process_b%", replacement = match_timepoints_process_b, x = proto_input)
 
   (match_time_since_bl <- paste0("time",wave_set_modeled,"=", "time_since_bl","_",wave_set_modeled,";"))
   match_time_since_bl <- paste(match_time_since_bl, collapse="\n")
