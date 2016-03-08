@@ -99,16 +99,34 @@ d <- d %>%
   ) %>%
   dplyr::ungroup()
 
+# ---- compute_subsetting_conditions ---------------------
 
+d <- d %>%
+  dplyr::group_by(id) %>%
+  dplyr::mutate(dementia_ever = any(dementia==1)) %>%
+  dplyr::ungroup() #%>%
+  #dplyr::filter(dementia_ever %in% c(FALSE, NA))
+
+# ---- center_covariates ---------------------------------
+d <- d %>%
+  dplyr::mutate(age_centered_70 = age_bl - 70)  %>% 
+  dplyr::mutate(height_centered_160 = htm - 1.6)  %>% 
+  dplyr::mutate(edu_centered_7 = educ - 7)  
+
+d %>% dplyr::glimpse()
+
+
+# ---- missing_values -----------------------------
+# remove observations with missing values on the time variable
+table(d$fu_year, useNA = "always")
+d <- d %>% dplyr::filter(!is.na(fu_year))
+table(d$fu_year, useNA = "always")
 
 # ---- long_to_wide -----------------------------------------
 # long to wide conversion might rely on the classification given to the variables with respect to time : variant or invariant
 # should this classification be manual or automatic?
-table(d$fu_year, useNA = "always")
 
-d <- d[!is.na(d$fu_year),] # remove obs with NA for the follow up year
-
-dw <- data.table::dcast(data.table::setDT(d), id + age_bl + htm + wtkg + msex + race + educ ~ fu_year, value.var = c(
+dw <- data.table::dcast(data.table::setDT(d), id + age_bl + age_centered_70 + htm + height_centered_160 + wtkg + msex + race + educ + edu_centered_7 ~ fu_year, value.var = c(
   "age_at_visit", #Age at cycle - fractional
   "time_since_bl", # time elapsed since the baseline
   "dementia", # Dementia diagnosis
@@ -122,9 +140,9 @@ dw <- data.table::dcast(data.table::setDT(d), id + age_bl + htm + wtkg + msex + 
   "gripavg" # Extremity strength
 
 
-  ))
+  )) 
 
-
+# recode missing values
 dw[is.na(dw)] <- -9999
 
 set.seed(42)
