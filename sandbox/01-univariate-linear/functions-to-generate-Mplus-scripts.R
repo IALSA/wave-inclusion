@@ -19,7 +19,7 @@ make_script_waves <- function(
   ,process_a_name = 'numbercomp'# measure name
   ,process_a_mplus = 'cts_nccrtd'# Mplus variable
   ,subgroup_sex = "male" #
-  ,covariates = "Bage Educat Height"
+  # ,covariates = "Bage Educat Height" # make this a vector of string 
   # ,wave_set_possible = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)  #Integer vector of the possible waves of the study, ie 1:16,
   ,wave_set_modeled =  c(1,2,3,4,5)   #Integer vector of waves considered by the model, ie c(1,2,3,5,8).
   ,run_models = FALSE
@@ -76,9 +76,10 @@ make_script_waves <- function(
 
   # Useobservations are # select a subset of observation
   if(subgroup_sex=="male"){
-    print_sex_value <- paste0("msex EQ 1")}else{
-      print_sex_value <- paste0("msex EQ 0")
-    }
+    print_sex_value <- paste0("msex EQ 1")
+  } else {
+    print_sex_value <- paste0("msex EQ 0")
+  }
   proto_input <- gsub("msex EQ %subgroup_sex%", paste0("msex EQ ",print_sex_value), proto_input)
   
 #   if(condition1=="dementia"){
