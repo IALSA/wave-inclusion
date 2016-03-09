@@ -30,7 +30,7 @@ make_script_waves <- function(
   , process_a_mplus = 'cts_nccrtd'# Mplus variable
   , subgroup_sex = "male" #
   , subset_condition_1 = "dementia_ever NE 1"
-    , covariate_set = c("age_centered_70","edu_centered_7", "height_centered_160")   # make this a vector of string 
+  , covariate_set = c("age_c70","htm_c160", "edu_c7")  # make this a vector of string 
     # ,wave_set_possible = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)  #Integer vector of the possible waves of the study, ie 1:16,
   , wave_set_modeled =  c(1,2,3,4,5)   #Integer vector of waves considered by the model, ie c(1,2,3,5,8).
   , run_models = FALSE

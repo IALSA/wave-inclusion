@@ -107,12 +107,16 @@ d <- d %>%
   dplyr::ungroup() #%>%
   #dplyr::filter(dementia_ever %in% c(FALSE, NA))
 
+d <- as.data.frame(d)
+table(d$dementia_ever, useNA="always")
+d$dementia_ever <- as.numeric(d$dementia_ever)
+d <- dplyr::tbl_df(d)
 
 # ---- center_covariates ---------------------------------
 d <- d %>%
-  dplyr::mutate(age_centered_70 = age_bl - 70)  %>% 
-  dplyr::mutate(height_centered_160 = htm - 1.6)  %>% 
-  dplyr::mutate(edu_centered_7 = educ - 7)  
+  dplyr::mutate(age_c70 = age_bl - 70)  %>% 
+  dplyr::mutate(htm_c160 = htm - 1.6)  %>%
+  dplyr::mutate(edu_c7 = educ - 7)  
 
 d %>% dplyr::glimpse()
 
@@ -127,7 +131,7 @@ table(d$fu_year, useNA = "always")
 # long to wide conversion might rely on the classification given to the variables with respect to time : variant or invariant
 # should this classification be manual or automatic?
 
-dw <- data.table::dcast(data.table::setDT(d), id + age_bl + age_centered_70 + htm + height_centered_160 + wtkg + msex + race + educ + edu_centered_7 + dementia_ever ~ fu_year, value.var = c(
+dw <- data.table::dcast(data.table::setDT(d), id + age_bl + age_c70 + htm + htm_c160 + wtkg + msex + race + educ + edu_c7 + dementia_ever ~ fu_year, value.var = c(
   "age_at_visit", #Age at cycle - fractional
   "time_since_bl", # time elapsed since the baseline
   "dementia", # Dementia diagnosis
@@ -144,21 +148,28 @@ dw <- data.table::dcast(data.table::setDT(d), id + age_bl + age_centered_70 + ht
   )) 
 
 # recode missing values
+
+
+# set.seed(42)
+# random_subset <- sample(unique(dw$id), size = 500)
+# dw <- dw[d$id %in% random_subset, ]
+
 dw[is.na(dw)] <- -9999
+dw %>% dplyr::glimpse()
+table(dw$age_centered_70, useNA = "always")
 
-set.seed(42)
-random_subset <- sample(unique(dw$id), size = 500)
-dw <- dw[d$id %in% random_subset, ]
 
+
+# dw %>% dplyr::glimpse()
 
 # ---- export_data -------------------------------------
 # At this point we would like to export the data in .dat format
 # to be fed to Mplus for any subsequent modeling
-place_in_folder <- "./sandbox/01-univariate-linear/example/"
+# place_in <- "./sandbox/01-univariate-linear/numbercomp/"
 
-write.table(d,paste0(place_in_folder,"long-dataset.dat"), row.names=F, col.names=F)
-write(names(d), paste0(place_in_folder,"long-variable-names.txt"), sep=" ")
+write.table(d,paste0(place_in,"long-dataset.dat"), row.names=F, col.names=F)
+write(names(d), paste0(place_in,"long-variable-names.txt"), sep=" ")
 
-write.table(dw, paste0(place_in_folder,"wide-dataset.dat"), row.names=F, col.names=F)
-write(names(dw), paste0(place_in_folder,"wide-variable-names.txt"), sep=" ")
+write.table(dw, paste0(place_in,"wide-dataset.dat"), row.names=F, col.names=F)
+write(names(dw), paste0(place_in,"wide-variable-names.txt"), sep=" ")
  

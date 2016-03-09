@@ -15,4 +15,12 @@ ds %>% dplyr::group_by(id) %>%
   dplyr::ungroup() %>%
   dplyr::filter(dementia_ever %in% c(FALSE, NA))
 
-  
+
+# ----- converting-logical-to-numeric -------------------------------
+# Mplus requires all numeric data in columns. This implies that  
+# 1) Logical vectors must be converted to numeric
+# 2) NA in this verctor must be replaced by a numeric code
+
+a <- c(FALSE, TRUE, NA)
+str(a)
+b <- as.numeric(a)

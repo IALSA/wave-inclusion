@@ -21,11 +21,8 @@ requireNamespace("stringr")
 
 #e.g pc_TAU_00 <- c("pc_TAU_00_est", "pc_TAU_00_se", "pc_TAU_00_wald", "pc_TAU_00_pval")
 source("./scripts/mplus/group-variables.R") # selected_results
-# load functions that generate scripts
-source("./sandbox/01-univariate-linear/functions-to-generate-Mplus-scripts.R")
-
-
-
+# load functions that process the output files and create a summary dataset
+source("./scripts/mplus/extraction-functions.R")
 # create a object with main_theme definition
 source("./scripts/graphs/main-theme.R")
 
@@ -39,39 +36,33 @@ source("./scripts/graphs/main-theme.R")
 ## @knitr dummy_1
 # Use the first example as the template for further pairs
 # from "./sandbox/syntax-creator/functions_to_generate_Mplus_scripts.R"
+
+process_a_name = 'numbercomp'
+process_a_mplus = 'cts_nccrtd'
+subgroup_sex = "male" # switching to "female" doesn't work yet
+place_in = "sandbox/01-univariate-linear/numbercomp"
+wave_set_modeled =  c(1,2,3,4) 
+
+# load functions that generate scripts
+place_in_folder <- "./sandbox/01-univariate-linear/numbercomp/"
+
+source("./sandbox/01-univariate-linear/functions-to-generate-Mplus-scripts.R")
+
 make_script_waves(
-  prototype = "sandbox/01-univariate-linear/prototype-map-wide.inp"
-  ,place_in = "sandbox/01-univariate-linear/example"
-  ,process_a_name = 'numbercomp'# measure name
-  ,process_a_mplus = 'cts_nccrtd'# Mplus variable
-  ,subgroup_sex = "male" #
-  , subset_condition_1 = "dementia_ever NE 1"
-  # ,covariates = "Bage Educat Height"
-  # ,wave_set_possible = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)  #Integer vector of the possible waves of the study, ie 1:16,
-  ,wave_set_modeled =  c(1,2,3,4,5)   #Integer vector of waves considered by the model, ie c(1,2,3,5,8).
+    prototype = "sandbox/01-univariate-linear/prototype-map-wide.inp"
+  , place_in = place_in
+  , process_a_name = process_a_name# measure name, will appear in graphs
+  , process_a_mplus = process_a_mplus# Mplus variable, will be used in estimation
+  , subgroup_sex = subgroup_sex #
+  , subset_condition_1 = "dementia_ever EQ 1"
+  , covariate_set = c("age_c70","htm_c160", "edu_c7") 
+  , wave_set_modeled =  wave_set_modeled   #Integer vector of waves considered by the model, ie c(1,2,3,5,8).
   ,run_models = FALSE
 ) # generate mplus scripts from a prototype, estimate (run_models=TRUE)
-   
 
-# load functions that process the output files and create a summary dataset
-source("./scripts/mplus/extraction-functions.R")
-collect_model_results(folder = "./sandbox/01-univariate-linear/example") # collect and save into the same folder
-# ds <- readRDS(paste0(pathFolder,".rds")) # load the data for outcome pair
+collect_model_results(folder = place_in) # collect and save into the same folder
+ 
 
-# load functions that create information displays from the collected model results
-# source("./scripts/graphs/koval_brown_profiles.R")
-# kb_profiles(ds,  vertical="wave_count",  border=5) # produces the kb_profile graph
-
-
-
-
-#### Grip - Boston Naming Task ####
-
-# from "./sandbox/syntax-creator/extraction_functions.R  script
-collect_model_results(folder = "outputs/pairs/grip_bnt") # collect and save into the same folder
-ds <- readRDS(file.path(pathFolder,"grip_bnt.rds")) # load the data for outcome pair
-# from "./scripts/graphs/koval_brown_profiles.R"
-kb_profiles(ds,  vertical="wave_count",  border=5) # produces the kb_profile graph
 
 
 
