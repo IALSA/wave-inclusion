@@ -1,5 +1,5 @@
 TITLE:
-Script produced from the prototype in ./sandbox/syntax-creator
+Script produced from the prototype in ./sandbox/01-univariate-linear
 
 DATA:
 File = wide-dataset.dat;
@@ -13,14 +13,13 @@ Missing are all (-9999);
 
 USEVAR are
 	!define the variables used in the analysis
+	! covariates used in the model
+%covariate_set%	
 	!estimated timepoints
 %estimated_timepoints%
 	!modelled timepoints of process A
 %process_a_timepoints% 
-	! covariates used in the model
-Bage
-Educat
-Height 
+
 ;
 
 TSCORES are
@@ -29,15 +28,10 @@ TSCORES are
 
 USEOBSERVATIONS are
 	!select a subset of observations
-msex EQ %subgroup_sex% and
-! condition 1 : dementia NE 1 at any of the time points 
-%condition_1%
-!dementia_0 NE 1 and dementia_1 NE 1 and dementia_2 NE 1 and
-!dementia_3 NE 1 and dementia_4 NE 1 and dementia_5 NE 1 and
-!dementia_6 NE 1 and dementia_7 NE 1 and dementia_8 NE 1 and
-!dementia_9 NE 1 and dementia_10 NE 1 and dementia_11 NE 1 and
-!dementia_12 NE 1 and dementia_13 NE 1 and dementia_14 NE 1 and
-!dementia_15 NE 1 and dementia_16;
+msex EQ %subgroup_sex% 
+and
+%subset_condition_1%
+;
 
 DEFINE:
 	! assign variables to the process a
@@ -45,11 +39,6 @@ DEFINE:
 	!assign variables to time points
 %match_timepoints%
 	
-	!define the second-level terms
-Bage =   age_bl - 70;    ! Age centered at 70 baseline
-Educat =     educ - 7;     ! Education centered at 7 years
-Height = htm - 1.60;  ! Height at 160 cm
-
 
 
 ANALYSIS:
@@ -66,7 +55,9 @@ sa (v_sa);
 	!covariance among first-level terms
 ia WITH sa (c_iasb);
 	!second-level equation
-ia sa  ON %covariates%;
+ia sa  ON 
+%covariate_set%;
+
 	!residual means of process A
 %process_a_timepoints% (res_a);
 	!residual means of process A

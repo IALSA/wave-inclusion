@@ -8,7 +8,7 @@ library(ggplot2)
 
 
 pathRoot <- getwd()
-pathFolder <- file.path(pathRoot,"sandbox/01-univariate-linear/example/outputs")
+pathFolder <- file.path(pathRoot,"sandbox/01-univariate-linear/example")
 
 requireNamespace("ggplot2")
 requireNamespace("dplyr") #Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
@@ -20,7 +20,7 @@ requireNamespace("stringr")
 
 
 #e.g pc_TAU_00 <- c("pc_TAU_00_est", "pc_TAU_00_se", "pc_TAU_00_wald", "pc_TAU_00_pval")
-source("./sandbox/01-univariate-linear/group-variables.R") # selected_results
+source("./scripts/mplus/group-variables.R") # selected_results
 # load functions that generate scripts
 source("./sandbox/01-univariate-linear/functions-to-generate-Mplus-scripts.R")
 
@@ -31,8 +31,6 @@ source("./scripts/graphs/main-theme.R")
 
 
 ## look at the data
-# source("./sandbox/01-univariate-linear/look-at-data.R")
-str(dw)
 ## Run the lines above to load the needed functions
 ## Execute script snippets for each pair individually below this
 
@@ -47,12 +45,13 @@ make_script_waves(
   ,process_a_name = 'numbercomp'# measure name
   ,process_a_mplus = 'cts_nccrtd'# Mplus variable
   ,subgroup_sex = "male" #
-  ,covariates = "Bage Educat Height"
+  , subset_condition_1 = "dementia_ever NE 1"
+  # ,covariates = "Bage Educat Height"
   # ,wave_set_possible = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)  #Integer vector of the possible waves of the study, ie 1:16,
   ,wave_set_modeled =  c(1,2,3,4,5)   #Integer vector of waves considered by the model, ie c(1,2,3,5,8).
   ,run_models = FALSE
 ) # generate mplus scripts from a prototype, estimate (run_models=TRUE)
-  
+   
 
 # load functions that process the output files and create a summary dataset
 source("./scripts/mplus/extraction-functions.R")

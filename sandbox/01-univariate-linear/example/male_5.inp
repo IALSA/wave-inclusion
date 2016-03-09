@@ -1,10 +1,11 @@
 TITLE:
-Script produced from the prototype in ./sandbox/syntax-creator
+Script produced from the prototype in ./sandbox/01-univariate-linear
 DATA:
 File = wide-dataset.dat;
 VARIABLE:
 Names are
- id age_bl htm wtkg msex race educ age_at_visit_0 age_at_visit_1 age_at_visit_2
+ id age_bl age_centered_70 htm height_centered_160 wtkg msex race educ
+    edu_centered_7 dementia_ever age_at_visit_0 age_at_visit_1 age_at_visit_2
     age_at_visit_3 age_at_visit_4 age_at_visit_5 age_at_visit_6 age_at_visit_7
     age_at_visit_8 age_at_visit_9 age_at_visit_10 age_at_visit_11
     age_at_visit_12 age_at_visit_13 age_at_visit_14 age_at_visit_15
@@ -37,6 +38,10 @@ Names are
 Missing are all (-9999);
 USEVAR are
 	!define the variables used in the analysis
+	! covariates used in the model
+age_centered_70
+edu_centered_7
+height_centered_160	
 	!estimated timepoints
 time1
 time2
@@ -49,10 +54,6 @@ a2
 a3
 a4
 a5 
-	! covariates used in the model
-Bage
-Educat
-Height 
 ;
 TSCORES are
 	!estimated timepoints
@@ -63,15 +64,10 @@ time4
 time5;
 USEOBSERVATIONS are
 	!select a subset of observations
-msex EQ msex EQ 1 and
-! condition 1 : dementia NE 1 at any of the time points 
-%condition_1%
-!dementia_0 NE 1 and dementia_1 NE 1 and dementia_2 NE 1 and
-!dementia_3 NE 1 and dementia_4 NE 1 and dementia_5 NE 1 and
-!dementia_6 NE 1 and dementia_7 NE 1 and dementia_8 NE 1 and
-!dementia_9 NE 1 and dementia_10 NE 1 and dementia_11 NE 1 and
-!dementia_12 NE 1 and dementia_13 NE 1 and dementia_14 NE 1 and
-!dementia_15 NE 1 and dementia_16;
+msex EQ msex EQ 1 
+and
+dementia_ever NE 1
+;
 DEFINE:
 	! assign variables to the process a
 a1=cts_nccrtd_1;
@@ -86,10 +82,6 @@ time3=time_since_bl_3;
 time4=time_since_bl_4;
 time5=time_since_bl_5;
 	
-	!define the second-level terms
-Bage =   age_bl - 70;    ! Age centered at 70 baseline
-Educat =     educ - 7;     ! Education centered at 7 years
-Height = htm - 1.60;  ! Height at 160 cm
 ANALYSIS:
 TYPE = RANDOM;
 COVERAGE=.00;
@@ -103,7 +95,10 @@ sa (v_sa);
 	!covariance among first-level terms
 ia WITH sa (c_iasb);
 	!second-level equation
-ia sa  ON Bage Educat Height;
+ia sa  ON 
+age_centered_70
+edu_centered_7
+height_centered_160;
 	!residual means of process A
 a1
 a2

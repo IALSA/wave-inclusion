@@ -107,6 +107,7 @@ d <- d %>%
   dplyr::ungroup() #%>%
   #dplyr::filter(dementia_ever %in% c(FALSE, NA))
 
+
 # ---- center_covariates ---------------------------------
 d <- d %>%
   dplyr::mutate(age_centered_70 = age_bl - 70)  %>% 
@@ -126,7 +127,7 @@ table(d$fu_year, useNA = "always")
 # long to wide conversion might rely on the classification given to the variables with respect to time : variant or invariant
 # should this classification be manual or automatic?
 
-dw <- data.table::dcast(data.table::setDT(d), id + age_bl + age_centered_70 + htm + height_centered_160 + wtkg + msex + race + educ + edu_centered_7 ~ fu_year, value.var = c(
+dw <- data.table::dcast(data.table::setDT(d), id + age_bl + age_centered_70 + htm + height_centered_160 + wtkg + msex + race + educ + edu_centered_7 + dementia_ever ~ fu_year, value.var = c(
   "age_at_visit", #Age at cycle - fractional
   "time_since_bl", # time elapsed since the baseline
   "dementia", # Dementia diagnosis
@@ -160,3 +161,4 @@ write(names(d), paste0(place_in_folder,"long-variable-names.txt"), sep=" ")
 
 write.table(dw, paste0(place_in_folder,"wide-dataset.dat"), row.names=F, col.names=F)
 write(names(dw), paste0(place_in_folder,"wide-variable-names.txt"), sep=" ")
+ 

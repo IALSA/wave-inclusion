@@ -13,16 +13,27 @@
 # processC = "digit_symbols"
 # covariates = "a"
 
+# prototype = "sandbox/01-univariate-linear/prototype-map-wide.inp"
+# place_in = "sandbox/01-univariate-linear/example"
+# process_a_name = 'numbercomp'# measure name
+# process_a_mplus = 'cts_nccrtd'# Mplus variable
+# subgroup_sex = "male" #
+# subset_condition_2 = "dementia_ever NE 1"
+# wave_set_modeled =  c(1,2,3,4,5)   #Integer vector of waves considered by the model, ie c(1,2,3,5,8).
+# run_models = FALSE
+
+
 make_script_waves <- function(
-  prototype = "sandbox/01-univariate-linear/prototype-map-wide.inp"
-  ,place_in = "sandbox/01-univariate-linear/example"
-  ,process_a_name = 'numbercomp'# measure name
-  ,process_a_mplus = 'cts_nccrtd'# Mplus variable
-  ,subgroup_sex = "male" #
-  # ,covariates = "Bage Educat Height" # make this a vector of string 
-  # ,wave_set_possible = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)  #Integer vector of the possible waves of the study, ie 1:16,
-  ,wave_set_modeled =  c(1,2,3,4,5)   #Integer vector of waves considered by the model, ie c(1,2,3,5,8).
-  ,run_models = FALSE
+    prototype = "sandbox/01-univariate-linear/prototype-map-wide.inp"
+  , place_in = "sandbox/01-univariate-linear/example"
+  , process_a_name = 'numbercomp'# measure name
+  , process_a_mplus = 'cts_nccrtd'# Mplus variable
+  , subgroup_sex = "male" #
+  , subset_condition_1 = "dementia_ever NE 1"
+    , covariate_set = c("age_centered_70","edu_centered_7", "height_centered_160")   # make this a vector of string 
+    # ,wave_set_possible = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)  #Integer vector of the possible waves of the study, ie 1:16,
+  , wave_set_modeled =  c(1,2,3,4,5)   #Integer vector of waves considered by the model, ie c(1,2,3,5,8).
+  , run_models = FALSE
                                 ){
 
 
@@ -46,7 +57,7 @@ make_script_waves <- function(
   (d <- as.numeric(c))
   wave_set_possible <- d
   
-  wave_modeled_max <- max(wave_set_modeled)
+  (wave_modeled_max <- max(wave_set_modeled))
 
 
   # after modification .inp files will be saved as:
@@ -64,8 +75,8 @@ make_script_waves <- function(
   names_are <- paste(names_are, collapse="\n") #Collapse all the variable names to one element (seperated by line breaks).
   names_are <- stringr::str_wrap(str = names_are, width  = 80, exdent = 4)
   proto_input <- gsub(pattern = "%names_are%", replacement = names_are, x = proto_input)
-  # Usevar are # what variables are used in estimation
-
+  
+  # USEVAR are # what variables are used in estimation
   estimated_timepoints <- paste0("time",wave_set_modeled)
   estimated_timepoints <- paste(estimated_timepoints, collapse="\n")
   proto_input <- gsub(pattern ="%estimated_timepoints%", replacement = estimated_timepoints, x = proto_input)
@@ -73,7 +84,11 @@ make_script_waves <- function(
   process_a_timepoints <- paste0("a",wave_set_modeled)
   process_a_timepoints <- paste(process_a_timepoints, collapse="\n")
   proto_input <- gsub(pattern ="%process_a_timepoints%", replacement = process_a_timepoints, x = proto_input)
-
+  
+  covariate_set <- paste(covariate_set, collapse="\n")
+  proto_input <- gsub(pattern = "%covariate_set%", replacement = covariate_set, x = proto_input)
+  
+  
   # Useobservations are # select a subset of observation
   if(subgroup_sex=="male"){
     print_sex_value <- paste0("msex EQ 1")
@@ -82,34 +97,17 @@ make_script_waves <- function(
   }
   proto_input <- gsub("msex EQ %subgroup_sex%", paste0("msex EQ ",print_sex_value), proto_input)
   
-#   if(condition1=="dementia"){
-#     cond1_stem <- "dementia"
-#     cond1_value <- "1"
-#     a <- length(wave_set_possible)-1 
-#     paste()
-#     print_cond1_value <- paste0(stem,"_",wave_set_possible, " NE ", cond1_value," and " )
-#   }
-#   
-#   requireNamespace("stringr")
-#   
-#   waves <- c(1:13, 16)
-#   
-#   a <- paste(paste0("a", waves), collapse=" ")
-#   times <-  paste(paste0("time", waves), collapse=" ")
-#   model_long <- paste("ia sa |", a, "AT", times, ";", collapse=" ")
-#   model_wrap <- stringr::str_wrap( str = model_long, width  = 35, exdent = 4 )
-#   
-#   "dementia","_",a," NE"
-#   
+  
+  proto_input <- gsub("%subset_condition_1%", subset_condition_1, proto_input)
+  
+   
   # DEFINE:
 
   (match_timepoints_process_a <- paste0("a",wave_set_modeled,"=",process_a_mplus,"_",wave_set_modeled,";"))
   match_timepoints_process_a <- paste(match_timepoints_process_a, collapse="\n")
   proto_input <- gsub(pattern ="%match_timepoints_process_a%", replacement = match_timepoints_process_a, x = proto_input)
 
-#   (match_timepoints_process_b <- paste0("b",wave_set_modeled,"=",process_b_mplus,"_",wave_set_modeled,";"))
-#   match_timepoints_process_b <- paste(match_timepoints_process_b, collapse="\n")
-#   proto_input <- gsub(pattern ="%match_timepoints_process_b%", replacement = match_timepoints_process_b, x = proto_input)
+
 
   (match_time_since_bl <- paste0("time",wave_set_modeled,"=", "time_since_bl","_",wave_set_modeled,";"))
   match_time_since_bl <- paste(match_time_since_bl, collapse="\n")
@@ -130,7 +128,7 @@ make_script_waves <- function(
   #       wave_set <- paste0("time",wave_set_possible)
   #
   # proto_input <- gsub("%waves_max%",    waves_max, proto_input)
-  proto_input <- gsub("%covariates%", covariates, proto_input)
+  # proto_input <- gsub("%covariate_set%", covariates, proto_input)
 
 
 
