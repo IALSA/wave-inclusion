@@ -20,6 +20,7 @@ loadNamespace("data.table") # data transformations
 # ---- declare-globals ---------------------------------------------------------
 # path_input  <- "./data/unshared/raw/map/ds0.rds"
 path_input  <- "../MAP/data-unshared/derived/ds0.rds"
+# path_input  <- "./data-unshared/raw/map/ds0.rds"
 # figure_path <- 'manipulation/stitched-output/te/'
 
 # put test assert here to check the connection.
@@ -165,7 +166,7 @@ table(dw$age_centered_70, useNA = "always")
 # ---- export_data -------------------------------------
 # At this point we would like to export the data in .dat format
 # to be fed to Mplus for any subsequent modeling
-# place_in <- "./sandbox/01-univariate-linear/numbercomp/"
+place_in <- "./sandbox/01-univariate-linear/numbercomp/"
 
 write.table(d,paste0(place_in,"long-dataset.dat"), row.names=F, col.names=F)
 write(names(d), paste0(place_in,"long-variable-names.txt"), sep=" ")
