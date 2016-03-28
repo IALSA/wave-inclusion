@@ -19,7 +19,7 @@ requireNamespace("MplusAutomation")
 requireNamespace("stringr")
 
 
-#e.g pc_TAU_00 <- c("pc_TAU_00_est", "pc_TAU_00_se", "pc_TAU_00_wald", "pc_TAU_00_pval")
+#e.g ab_TAU_00 <- c("ab_TAU_00_est", "ab_TAU_00_se", "ab_TAU_00_wald", "ab_TAU_00_pval")
 source("./scripts/mplus/group-variables.R") # selected_results
 # load functions that process the output files and create a summary dataset
 source("./scripts/mplus/extraction-functions.R")

@@ -21,13 +21,13 @@ ab_TAU_11 <- c("ab_TAU_11_est", "ab_TAU_11_se", "ab_TAU_11_wald", "ab_TAU_11_pva
 ab_TAU_01 <- c("ab_TAU_01_est", "ab_TAU_01_se", "ab_TAU_01_wald","ab_TAU_01_pval")
 # covariance btw slope of process (A) and intercept of process (B)
 ab_TAU_10 <- c("ab_TAU_10_est", "ab_TAU_10_se", "ab_TAU_10_wald", "ab_TAU_10_pval")
-# covariance btw physcial residual and cogntive residual
+# covariance btw residual of process (A) and residual of process (B)
 ab_SIGMA <- c("ab_SIGMA_est", "ab_SIGMA_se", "ab_SIGMA_wald", "ab_SIGMA_pval")
 
 
 # variance of the intercept of process (A)
  aa_TAU_00 <- c("aa_TAU_00_est", "aa_TAU_00_se","aa_TAU_00_wald", "aa_TAU_00_pval")
-# variance of the slope of process (B)
+# variance of the slope of process (A)
  aa_TAU_11 <- c("aa_TAU_11_est", "aa_TAU_11_se","aa_TAU_11_wald", "aa_TAU_11_pval")
 # covariance of intercept of process (A) and slope of process (A)
  aa_TAU_01 <- c("aa_TAU_01_est", "aa_TAU_01_se","aa_TAU_01_wald", "aa_TAU_01_pval")
@@ -45,13 +45,13 @@ ab_SIGMA <- c("ab_SIGMA_est", "ab_SIGMA_se", "ab_SIGMA_wald", "ab_SIGMA_pval")
  b_SIGMA <- c("b_SIGMA_est", "b_SIGMA_se", "b_SIGMA_wald",  "b_SIGMA_pval")
 
 
-# intercept of process (A) / average initial status of physical outcome
+# intercept of process (A) / average initial status of process (A)
  a_GAMMA_00 <- c("a_GAMMA_00_est", "a_GAMMA_00_se", "a_GAMMA_00_wald","a_GAMMA_00_pval")
-# slope of process (A) / average rate of change of physical outcome
+# slope of process (A) / average rate of change of process (A)
  a_GAMMA_10 <- c("a_GAMMA_10_est", "a_GAMMA_10_se", "a_GAMMA_10_wald","a_GAMMA_10_pval")
-# slope of process (B) / average rate of change of cognitive outcome
+# slope of process (B) / average rate of change of process (B)
  b_GAMMA_10 <- c("b_GAMMA_10_est", "b_GAMMA_10_se","b_GAMMA_10_wald", "b_GAMMA_10_pval")
- # intercept of process (B) /  average initial status of cognitive outcome
+ # intercept of process (B) /  average initial status of process (B)
  b_GAMMA_00 <- c("b_GAMMA_00_est", "b_GAMMA_00_se", "b_GAMMA_00_wald", "b_GAMMA_00_pval")
 
 
@@ -119,24 +119,24 @@ ab_SIGMA <- c("ab_SIGMA_est", "ab_SIGMA_se", "ab_SIGMA_wald", "ab_SIGMA_pval")
  R_IAIB <- c("R_IAIB_est", "R_IAIB_se","R_IAIB_wald", "R_IAIB_pval")
 # correlation b/w slope of process (A)  and slope of process (B)
  R_SASB <- c("R_SASB_est", "R_SASB_se", "R_SASB_wald", "R_SASB_pval")
-# correlation b/w residual of process (A) and cogntive RESIDUAL
+# correlation b/w RESIDUAL of process (A) and RESIDUAL of process (B)
  R_RES_AB <- c("R_RES_AB_est", "R_RES_AB_se","R_RES_AB_wald",  "R_RES_AB_pval")
 
  selected_results <- c( admin, model_id, model_info,
                         aa_TAU_00, aa_TAU_11, aa_TAU_01, a_SIGMA,
-                        a_GAMMA_00 ,a_GAMMA_10, 
+                        a_GAMMA_00 ,a_GAMMA_10,
                         a_GAMMA_01, a_GAMMA_11,
                         a_GAMMA_02, a_GAMMA_12,
                         a_GAMMA_03, a_GAMMA_13,
                         a_GAMMA_04, a_GAMMA_14,
                         a_GAMMA_05, a_GAMMA_15,
                         a_GAMMA_06, a_GAMMA_16,
-                        
+
                         # error log
                         errors
  )
- 
- 
+
+
 # selected_results <- c( admin, model_id, model_info,
 #    ab_TAU_00, ab_TAU_11, ab_TAU_01, ab_TAU_10, ab_SIGMA,
 #    aa_TAU_00, aa_TAU_11, aa_TAU_01, a_SIGMA,
@@ -148,7 +148,7 @@ ab_SIGMA <- c("ab_SIGMA_est", "ab_SIGMA_se", "ab_SIGMA_wald", "ab_SIGMA_pval")
 #    a_GAMMA_04, a_GAMMA_14, b_GAMMA_04, b_GAMMA_14,
 #    a_GAMMA_05, a_GAMMA_15, b_GAMMA_05, b_GAMMA_15,
 #    a_GAMMA_06, a_GAMMA_16, b_GAMMA_06, b_GAMMA_16,
-# 
+#
 #    # error log
 #    errors
 #  )

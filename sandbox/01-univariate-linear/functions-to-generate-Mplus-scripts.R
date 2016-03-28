@@ -1,17 +1,4 @@
 # ## This script declares the functions that generate Mplus .inp file used in model fitting.
-# options(width=160)
-# rm(list=ls())
-# cat("\f")
-#
-# ## @knitr load_packages
-# library(dplyr)
-# library(ggplot2)
-# library(tidyr)
-# library(IalsaSynthesis)
-#
-# processP = "grip"
-# processC = "digit_symbols"
-# covariates = "a"
 
 # prototype = "sandbox/01-univariate-linear/prototype-map-wide.inp"
 # place_in = "sandbox/01-univariate-linear/example"
