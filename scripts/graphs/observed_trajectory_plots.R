@@ -7,7 +7,7 @@ cat("\014")
 
 pathRoot <- getwd()
 path <- file.path(pathRoot,"data/raw/")
-radcfile <- paste0(path,"/radc_long.csv")
+radcfile <- paste0(path,"/map_long.csv")
 pathFolder<- file.path(pathRoot,"reports/observed_trajectory_plots")
 pathFolder
 #reading in the long RADC data file
